@@ -9,7 +9,7 @@ pubtheme <- theme_bw() +
   theme(panel.background = element_blank(),
         strip.background = element_blank(),
         panel.border = element_rect(size = 3, fill = NA),
-        axis.text = element_text(size = 16),,
+        axis.text = element_text(size = 16),
         axis.title = element_text(size = 20, face = "bold"),
         legend.box.background = element_blank(),
         legend.key = element_rect(fill = NA),
@@ -22,7 +22,7 @@ pubtheme <- theme_bw() +
 cbbPalette <- c("#E69F00", "#D55E00","#56B4E9", "#0072B2", "#009E73")
 
 ## Load N x pH dataset
-data <- read.csv("../data_sheets/NxS_datasheet.csv",
+data <- read.csv("../../nitrogen_pH/data_sheets/NxS_datasheet.csv",
                  stringsAsFactors = FALSE,
                  na.strings = "NA")
 
@@ -40,6 +40,29 @@ data <- subset(data, nrcs.code == "ACRU" | nrcs.code == "ACSA3" |
                  nrcs.code == "QURU" | nrcs.code == "FAGR" | 
                  nrcs.code == "FRAM2")
 data <- subset(data, is.na(nrcs.code) == FALSE)
+
+
+##########################################################################
+## Option 2 (growth) hypothesis
+##########################################################################
+df <- data.frame(soil = seq(1, 100, 1))
+df$growth <- sqrt(df$soil) + 10
+
+growth.hyp <- ggplot(data = df, aes(x = soil,
+                                    y = growth)) +
+  geom_line(size = 3) + 
+  labs(x = "Soil nitrogen availability",
+       y = "Whole plant growth") +
+  pubtheme +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        panel.grid = element_blank())
+
+ggsave(filename = "./figs/growth.hyp.png", 
+       width = 9,
+       height = 6,
+       units = "in",
+       dpi = "retina")
 
 ##########################################################################
 ## Net photosynthesis (area basis)
@@ -67,7 +90,7 @@ a.area <- ggplot(data = data,
   theme(legend.text = element_text(face = "italic"))
 a.area
 
-ggsave(filename = "/Users/eaperkowski/Desktop/esa2021.aarea.png",
+ggsave(filename = "./figs/esa2021.aarea.png",
        a.area,
        width = 9,
        height = 6,
@@ -99,7 +122,7 @@ narea <- ggplot(data = data, aes(x = mean.soil.n,
   theme(legend.text = element_text(face = "italic"))
 narea
 
-ggsave(filename = "/Users/eaperkowski/Desktop/esa2021.narea.png",
+ggsave(filename = "./figs/esa2021.narea.png",
        narea,
        width = 9,
        height = 6,
@@ -131,7 +154,7 @@ pnue <- ggplot(data = data, aes(x = mean.soil.n,
   theme(legend.text = element_text(face = "italic"))
 pnue
 
-ggsave(filename = "/Users/eaperkowski/Desktop/esa2021.pnue.png",
+ggsave(filename = "./figs/esa2021.pnue.png",
        pnue,
        width = 9,
        height = 6,
@@ -163,7 +186,7 @@ iwue <- ggplot(data = data, aes(x = mean.soil.n,
   theme(legend.text = element_text(face = "italic"))
 iwue
 
-ggsave(filename = "/Users/eaperkowski/Desktop/esa2021.iwue.png",
+ggsave(filename = "./figs/esa2021.iwue.png",
        iwue,
        width = 9,
        height = 6,
@@ -195,7 +218,7 @@ basal.area <- ggplot(data = data, aes(x = mean.soil.n,
   theme(legend.text = element_text(face = "italic"))
 basal.area
 
-ggsave(filename = "/Users/eaperkowski/Desktop/esa2021.basalarea.png",
+ggsave(filename = "./figs/esa2021.basalarea.png",
        basal.area,
        width = 9,
        height = 6,
@@ -227,7 +250,7 @@ rgr <- ggplot(data = data, aes(x = mean.soil.n,
   theme(legend.text = element_text(face = "italic"))
 rgr
 
-ggsave(filename = "/Users/eaperkowski/Desktop/esa2021.rgr.png",
+ggsave(filename = "./figs/esa2021.rgr.png",
        rgr,
        width = 9,
        height = 6,
