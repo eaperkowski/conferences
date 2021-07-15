@@ -90,6 +90,12 @@ a.area <- ggplot(data = data,
   theme(legend.text = element_text(face = "italic"))
 a.area
 
+## Determine % change
+ystart = 5
+yend = 0.0127*80 + 5.00
+
+((yend - ystart)/ystart)*100
+
 ggsave(filename = "./figs/esa2021.aarea.png",
        a.area,
        width = 9,
@@ -121,6 +127,12 @@ narea <- ggplot(data = data, aes(x = mean.soil.n,
   pubtheme +
   theme(legend.text = element_text(face = "italic"))
 narea
+
+## Determine % increase
+ystart = 1.46
+yend = 0.0037*80 + 1.46
+
+((yend - ystart)/ystart)*100
 
 ggsave(filename = "./figs/esa2021.narea.png",
        narea,
@@ -154,6 +166,12 @@ pnue <- ggplot(data = data, aes(x = mean.soil.n,
   theme(legend.text = element_text(face = "italic"))
 pnue
 
+## Determine % increase
+ystart = 3.303
+yend = 0.0148*80 + 3.303
+
+((yend - ystart)/ystart)*100
+
 ggsave(filename = "./figs/esa2021.pnue.png",
        pnue,
        width = 9,
@@ -186,6 +204,12 @@ iwue <- ggplot(data = data, aes(x = mean.soil.n,
   theme(legend.text = element_text(face = "italic"))
 iwue
 
+## Determine % change
+ystart = 100.313
+yend = -0.246*80 + 100.313
+
+((yend - ystart)/ystart)*100
+
 ggsave(filename = "./figs/esa2021.iwue.png",
        iwue,
        width = 9,
@@ -200,7 +224,7 @@ basal.area <- ggplot(data = data, aes(x = mean.soil.n,
                                       y = basal.area.2011.2019)) +
   geom_jitter(aes(color = nrcs.code), 
               width = 0.25, size = 5, alpha = 0.5) +
-  #geom_segment(aes(x = 0, xend = 80, y = 0.265, yend = 0.00153*80 + 0.265), 
+  #geom_segment(aes(x = 0, xend = 80, y = 21.316, yend = 0.116*80 + 21.316), 
   #             color = "black", size = 3, linetype = "twodash") +
   #geom_smooth(aes(color = nrcs.code), method = 'lm', se = FALSE) +
   scale_x_continuous(limits = c(0, 85), breaks = seq(0, 80, 20)) +
@@ -217,6 +241,12 @@ basal.area <- ggplot(data = data, aes(x = mean.soil.n,
   pubtheme +
   theme(legend.text = element_text(face = "italic"))
 basal.area
+
+## Determine % change
+ystart = 21.31691
+yend = 30.9621
+
+((yend - ystart)/ystart)*100
 
 ggsave(filename = "./figs/esa2021.basalarea.png",
        basal.area,
@@ -250,11 +280,23 @@ rgr <- ggplot(data = data, aes(x = mean.soil.n,
   theme(legend.text = element_text(face = "italic"))
 rgr
 
+## Determine % change
+ystart = 1.602
+yend = 0.00402*80 + 1.602
+
+((yend - ystart)/ystart)*100
+
 ggsave(filename = "./figs/esa2021.rgr.png",
        rgr,
        width = 9,
        height = 6,
        units = "in",
        dpi = "retina")
+
+
+ggplot(data = data, aes(x = n.area.gm2,
+                        y = vcmax.stand)) +
+  geom_point() +
+  geom_smooth(method = 'lm')
 
 
